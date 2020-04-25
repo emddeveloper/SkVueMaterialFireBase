@@ -24,6 +24,7 @@ export default {
     }
   },
   methods:{
+    //delete method to delete data from firebase
     deleteSmoothie(id){
       db.collection('smoothies').doc(id).delete().then(()=>{
          this.smoothies=this.smoothies.filter(smoothie=>{
