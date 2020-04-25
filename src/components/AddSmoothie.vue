@@ -9,8 +9,9 @@
            <div class="field" v-for="(ing,index) in ingradients" :key="index">
                <label for="title add-ingradient">Ingradient:</label>
                <input type="text"  name="add-ingradient-list" v-model="ingradients[index]">
+               <i class="material-icons delete-ingradient" @click="deleteIng(ing)">delete</i>
            </div>
-           <div class="field add-ingradient">
+           <div class="field add-ingradient" v-show="!ingStatus">
                <label for="title add-ingradient">Add an Ingradient:</label>
                <input type="text"  name="add-ingradient" v-model="another" @keydown.tab.prevent="addIng">
            </div>
@@ -34,17 +35,20 @@ export default {
             another:null,
             ingradients:[],
             feedback:null,
-            slug:'new-url'
+            slug:'new-url',
+            ingStatus:false
         }
     },
     methods:{
         addSmoothie(){
             if(this.title){
+                 this.addIng()
+                 this.ingStatus=true
                 this.feedback=null
                 this.slug=slugify(this.title,{
                     replacement: '-',  // replace spaces with replacement character, defaults to `-`
                     remove: /[*+~.()'"!:@]/g, // remove characters that match regex, defaults to `undefined`
-                    lower: false,      // convert to lower case, defaults to `false`
+                    lower: true,      // convert to lower case, defaults to `false`
                     strict: false, 
                 })
                 db.collection('smoothies').add({
@@ -71,6 +75,11 @@ export default {
             else{
                 this.feedback="Ingradient field is required"
             }
+        },
+        deleteIng(ing){
+            this.ingradients=this.ingradients.filter((ingradient)=>{
+                return ingradient != ing
+            })
         }
     }
 }
@@ -86,5 +95,14 @@ export default {
 }
 .add-smoothie .field{
     margin: 20px auto;
+    position: relative;
+}
+.delete-ingradient {
+    position: absolute;
+    color: #aaa;
+    font-size: 1.5em;
+    cursor: pointer;
+    right:0;
+    bottom:18px;
 }
 </style>
