@@ -25,8 +25,10 @@ export default {
   },
   methods:{
     deleteSmoothie(id){
-      this.smoothies=this.smoothies.filter(smoothie=>{
+      db.collection('smoothies').doc(id).delete().then(()=>{
+         this.smoothies=this.smoothies.filter(smoothie=>{
         return smoothie.id != id;
+        })
       })
     }
   },
@@ -34,7 +36,9 @@ export default {
     //fetch data from firestore
     db.collection('smoothies').get().then( snapshot =>{
       snapshot.forEach( doc =>{
-        this.smoothies.push(doc.data());
+        let smoothie = doc.data()
+        smoothie.id= doc.id
+        this.smoothies.push(smoothie);
       })
     })
   }
