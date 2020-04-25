@@ -1,5 +1,8 @@
 # ninjavuefire
 
+## Author :Sk Aminul Islam
+## email : emd.developer@gmail.com
+## help from Udemy The Net Ninja (Shaun Pelling)
 > A Vue.js project
 
 ## Build Setup
