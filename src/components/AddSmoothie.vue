@@ -25,7 +25,7 @@
 
 <script>
 import db from '@/firebase/init'
-
+import slugify from 'slugify'
 export default {
     name:'AddSmoothie',
     data(){
@@ -39,7 +39,15 @@ export default {
     },
     methods:{
         addSmoothie(){
-            db.collection('smoothies').add({
+            if(this.title){
+                this.feedback=null
+                this.slug=slugify(this.title,{
+                    replacement: '-',  // replace spaces with replacement character, defaults to `-`
+                    remove: /[*+~.()'"!:@]/g, // remove characters that match regex, defaults to `undefined`
+                    lower: false,      // convert to lower case, defaults to `false`
+                    strict: false, 
+                })
+                db.collection('smoothies').add({
                 title:this.title,
                 slug:this.slug,
                 ingradients:this.ingradients
@@ -48,6 +56,11 @@ export default {
             }).catch(err =>{
                 console.log(err)
             })
+            }
+            else{
+                this.feedback="Title is mandatory"
+            }
+            
         },
         addIng(){
             if(this.another){
