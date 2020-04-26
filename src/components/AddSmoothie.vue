@@ -15,9 +15,12 @@
                <label for="title add-ingradient">Add an Ingradient:</label>
                <input type="text"  name="add-ingradient" v-model="another" @keydown.tab.prevent="addIng">
            </div>
+           
            <div class="field center-align">
-               <p class="red-text" v-if="feedback">{{ feedback }}</p>
-               <button class="btn pink">Add Smoothie</button>
+                <p class="red-text" v-if="feedback">{{ feedback }}</p>
+                <button class="btn waves-effect waves-light" type="submit" name="action">Add Smoothie
+                    <i class="material-icons right">send</i>
+                </button>
            </div>
        </form>
    </div>

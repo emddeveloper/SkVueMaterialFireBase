@@ -10,6 +10,11 @@
           </li>
         </ul>
       </div>
+      <span class="btn-floating btn-small halfway-fab">
+        <router-link :to="{ name : 'EditSmoothie',params:{ smoothie_slug : smoothie.slug}}">
+          <i class="material-icons edit">edit</i>
+        </router-link>
+      </span>
     </div>
   </div>
 </template>
@@ -53,6 +58,7 @@ export default {
   grid-gap: 30px;
   margin-top: 60px;
 }
+
 .index h2{
   font-size: 1.8em;
   text-align: center;
@@ -69,7 +75,29 @@ export default {
   top:4px;
   right:4px;
   cursor: pointer;
-  color: #aaa;
+  color: rgb(235, 22, 22);
   font-size: 1.4em;
+}
+@media (max-width: 767px){
+  .index{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  margin-top: 30px;
+  }
+.index h2{
+  font-size: 1.2em;
+  }
+}
+@media (max-width: 480px){
+  .index{
+  display:grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  margin-top: 30px;
+}
+.index h2{
+  font-size: 1.5em;
+  }
 }
 </style>
